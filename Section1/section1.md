@@ -1,4 +1,4 @@
-# 프로젝트 생성
+\*# 프로젝트 생성
 
 ```
 npx create-next-app@latest
@@ -37,3 +37,18 @@ npm run dev
 - vanille extract -> Windows와 문제
 
 `dvw`, `dvh` 새로운 단위, 모바일 뷰에 주소창이 생기거나 꺼질 때 그런 거에 상관없이 전체화면에 채울 수 있음
+
+# 패러렐 라우트
+
+- Parellel Routes
+- Intercepting Routes
+
+# 클라이언트 컴포넌트로 전환하기
+
+서버 컴포넌트(데이터와 관련있음) -> 클라언트 컴포넌트
+
+```
+use client;
+```
+
+-
