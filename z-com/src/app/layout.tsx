@@ -19,18 +19,3 @@ export default function RootLayout({ children }: Props) {
     </html>
   );
 }
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en">
-//       <body className={inter.className}>{children}</body>
-//       루트 레이아웃
-//       {/* layout이 page를 포함하고 있음
-//       로그인을 했을 때와 하지 않았을 때가 다름*/}
-//     </html>
-//   );
-// }
