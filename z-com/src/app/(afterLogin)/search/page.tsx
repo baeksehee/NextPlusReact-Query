@@ -1,14 +1,38 @@
-import { ReactNode } from "react";
+import BackButton from "../_component/BackButton";
+import Post from "../_component/Post";
+import Tab from "./_component/Tab";
+import style from "./search.module.css";
 
-export default function AfterLoginLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+type Props = {
+  searchParams: { q: string; f?: string; pf?: string };
+};
+
+export default function Search({ searchParams }: Props) {
   return (
-    <div>
-      애프터 로그인 레이아웃
-      {children}
-    </div>
+    <main className={style.main}>
+      <div className={style.searchTop}>
+        <div className={style.serchZone}>
+          <div className={style.buttonZone}>
+            <BackButton />
+          </div>
+          {/* <div className={style.formZone}>
+            <SearchForm q={searchParams.q} />
+          </div> */}
+        </div>
+        <Tab />
+        <div className={style.list}>
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </div>
+      </div>
+    </main>
   );
 }
