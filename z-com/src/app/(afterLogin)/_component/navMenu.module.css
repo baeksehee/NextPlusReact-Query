@@ -10,8 +10,15 @@
   border-radius: 29px;
 }
 
-.navePill > div {
-  margin-left: 20px;
-  margin-right: 16px;
-  font-size: 20px;
+.navPill > div {
+  display: none;
+}
+
+@media all and (min-width: 1300px) {
+  .navPill > div {
+    margin-left: 20px;
+    margin-right: 16px;
+    font-size: 20px;
+    display: inline-block;
+  }
 }
