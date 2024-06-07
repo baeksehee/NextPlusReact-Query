@@ -1,6 +1,6 @@
 import { setupWorker } from "msw/browser";
 import { handlers } from "./handlers";
 
-const mocker = setupWorker(...handlers);
+const wocker = setupWorker(...handlers);
 
-export default mocker;
+export default wocker;
