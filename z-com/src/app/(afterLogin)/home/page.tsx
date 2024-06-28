@@ -8,23 +8,8 @@ import PostForm from "./_component/PostForm";
 import Tab from "./_component/Tab";
 import TabProvider from "./_component/TabProvider";
 import style from "./home.module.css";
-
-async function getPostRecommends() {
-  const res = await fetch("http://localhost:9090/api/postRecommends", {
-    next: {
-      tags: ["posts", "recommends"],
-    },
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { getPostRecommends } from "./_lib/getPostRecommends";
+import PostRecommends from "./_component/PostRecommends";
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -40,15 +25,7 @@ export default async function Home() {
         <TabProvider>
           <Tab />
           <PostForm />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          <PostRecommends />
         </TabProvider>
       </HydrationBoundary>
     </main>
