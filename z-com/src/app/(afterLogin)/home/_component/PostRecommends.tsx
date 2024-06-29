@@ -10,6 +10,7 @@ export default function PostRecommends() {
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
     staleTime: 60 * 1000, // fresh -> stale
+    gcTime: 300 * 1000,
   });
 
   return data?.map((post) => <Post key={post.postId} post={post} />);
