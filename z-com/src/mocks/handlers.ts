@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, StrictResponse } from "msw";
 
 function generateDate() {
   const lastWeek = new Date(Date.now());
@@ -209,9 +209,18 @@ export const handlers = [
       },
     ]);
   }),
-  http.get("./api/users/:userId", ({ request, params }) => {
+  http.get("/api/users/:userId", ({ request, params }): StrictResponse<any> => {
     const { userId } = params;
-    return HttpResponse.json(User[1]);
+    const found = User.find((v) => v.id === userId);
+    if (found) {
+      return HttpResponse.json(found);
+    }
+    return HttpResponse.json(
+      { message: "no_such_user" },
+      {
+        status: 404,
+      }
+    );
   }),
   http.get("/api/users/:userId/posts/:postId", ({ request, params }) => {
     const { userId, postId } = params;
