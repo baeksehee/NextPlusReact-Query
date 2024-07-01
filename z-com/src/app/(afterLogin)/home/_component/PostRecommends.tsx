@@ -5,13 +5,15 @@ import {
   useInfiniteQuery,
   useQuery,
 } from "@tanstack/react-query";
-import { getPostRecommends } from "../_lib/getPostRecommends";
+import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
+import Post from "@/app/(afterLogin)/_component/Post";
 import { Post as IPost } from "@/model/Post";
-import Post from "../../_component/Post";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useSession } from "next-auth/react";
 
 export default function PostRecommends() {
-  const { data } = useInfiniteQuery<
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
     IPost[],
     Object,
     InfiniteData<IPost[]>,
@@ -20,11 +22,21 @@ export default function PostRecommends() {
   >({
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
-    initialPageParam: 0, // [1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.at(-1)?.postId,
-    staleTime: 60 * 1000, // fresh -> stale
+    staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
     gcTime: 300 * 1000,
   });
+  const { ref, inView } = useInView({
+    threshold: 0,
+    delay: 0,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage();
+    }
+  }, [inView, isFetching, hasNextPage, fetchNextPage]);
 
   return (
     <>
@@ -35,6 +47,7 @@ export default function PostRecommends() {
           ))}
         </Fragment>
       ))}
+      <div ref={ref} style={{ height: 50 }} />
     </>
   );
 }
