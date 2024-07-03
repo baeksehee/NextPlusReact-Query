@@ -16,6 +16,13 @@ const User = [
   { id: "leoturtle", nickname: "레오", image: faker.image.avatar() },
 ];
 
+const Posts = [];
+
+// const delay = (ms) =>
+//   new Promise((res, rej) => {
+//     setTimeout(res, ms);
+//   });
+
 export const handlers = [
   http.post("/api/login", () => {
     // DB에서 데이터 가져오는거
