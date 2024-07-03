@@ -65,7 +65,8 @@ export default function ActionButtons({ white }: Props) {
             </g>
           </svg>
         </button>
-        <div className={style.count}>{1 || ""}</div>
+        <div className={style.count}>{1 || ""}</div>{" "}
+        {/* 1을 0으로 바꾸니깐 오류가 나네요*/}
       </div>
     </div>
   );

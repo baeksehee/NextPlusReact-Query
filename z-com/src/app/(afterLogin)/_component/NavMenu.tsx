@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 export default function NavMenu() {
-  const { data: me } = useSession();
   const segment = useSelectedLayoutSegment();
+  const { data: me } = useSession();
+
   console.log(segment);
 
   return (
@@ -121,7 +122,7 @@ export default function NavMenu() {
         <li>
           <Link href={`/${me?.user?.email}`}>
             <div className={style.navPill}>
-              {segment === me?.user?.email ? (
+              {segment === me.user?.email ? (
                 <>
                   <svg
                     width={26}
