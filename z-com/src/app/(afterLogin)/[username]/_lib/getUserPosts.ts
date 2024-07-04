@@ -10,7 +10,6 @@ export const getUserPosts: QueryFunction<
     next: {
       tags: ["posts", "users", username],
     },
-    credentials: "include",
     cache: "no-store",
   });
   // The return value is *not* serialized
