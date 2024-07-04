@@ -1,5 +1,4 @@
 type Props = { pageParam?: number };
-
 export async function getPostRecommends({ pageParam }: Props) {
   const res = await fetch(
     `http://localhost:9090/api/postRecommends?cursor=${pageParam}`,
@@ -7,7 +6,6 @@ export async function getPostRecommends({ pageParam }: Props) {
       next: {
         tags: ["posts", "recommends"],
       },
-      cache: "no-store",
     }
   );
   // The return value is *not* serialized

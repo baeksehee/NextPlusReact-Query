@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import TabDecider from "./TabDecider";
 import {
   HydrationBoundary,
