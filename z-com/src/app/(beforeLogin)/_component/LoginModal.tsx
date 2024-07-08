@@ -15,7 +15,7 @@ export default function LoginModal() {
     e.preventDefault();
     setMessage("");
     try {
-      await signIn(
+      const response = await signIn(
         "credentials", // "kakao", "google", "facebook", "github", "credentials": username, password
         {
           username: id,
@@ -23,10 +23,15 @@ export default function LoginModal() {
           redirect: false,
         }
       );
-      router.replace("/home");
+      console.log("hear2", response);
+      if (!response?.ok) {
+        setMessage("아이디와 비밀번호가 일치하지 않습니다.");
+      } else {
+        router.replace("/home");
+      }
     } catch (err) {
       console.error(err);
-      setMessage("아이디 또는 비밀번호가 일치하지 않습니다.");
+      setMessage("아이디와 비밀번호가 일치하지 않습니다.");
     }
   };
 
