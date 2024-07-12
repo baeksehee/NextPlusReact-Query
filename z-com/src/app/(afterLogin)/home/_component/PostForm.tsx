@@ -16,14 +16,14 @@ import { Post } from "@/model/Post";
 type Props = {
   me: Session | null;
 };
-
 export default function PostForm({ me }: Props) {
   const imageRef = useRef<HTMLInputElement>(null);
-  const [content, setContent] = useState("");
   const [preview, setPreview] = useState<
-    Array<{ dataUrl: string; file: File }>
+    Array<{ dataUrl: string; file: File } | null>
   >([]);
+  const [content, setContent] = useState("");
   const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: async (e: FormEvent) => {
       e.preventDefault();
@@ -32,7 +32,8 @@ export default function PostForm({ me }: Props) {
       preview.forEach((p) => {
         p && formData.append("images", p.file);
       });
-      return fetch(`${process.env.NEXT_PUBLIC_BASE_RUL}/api/posts`, {
+      return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+        //URL 주소가 안 맞았었음
         method: "post",
         credentials: "include",
         body: formData,
@@ -81,8 +82,6 @@ export default function PostForm({ me }: Props) {
     setContent(e.target.value);
   };
 
-  // const onSubmit: FormEventHandler = async;
-
   const onClickButton = () => {
     imageRef.current?.click();
   };
@@ -110,6 +109,7 @@ export default function PostForm({ me }: Props) {
             return prev;
           });
         };
+        reader.readAsDataURL(file); // 미리보기가 안 되었던 이유는 여기
       });
     }
   };
