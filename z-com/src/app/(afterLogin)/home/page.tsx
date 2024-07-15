@@ -8,6 +8,12 @@ import Loading from "./loading";
 import { auth } from "@/auth";
 import { QueryClient } from "@tanstack/react-query";
 import { getPostRecommends } from "./_lib/getPostRecommends";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "홈 / z",
+  description: "홈",
+};
 
 export default async function Home() {
   const session = await auth();
